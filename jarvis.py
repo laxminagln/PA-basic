@@ -1,32 +1,31 @@
 # -*- coding: utf-8 -*-
 """
 Created on Fri May 29 12:17:51 2020
-
 @author: nagln
 """
 
-import pyttsx3
-import datetime
-import speech_recognition as sr
-import wikipedia
-import smtplib
-import webbrowser as wb
-import os
-import pyautogui
-import psutil
-import pyjokes
+import pyttsx3                                                  #text to speech
+import datetime                                                 #date and time
+import speech_recognition as sr                                 #speech recognition
+import wikipedia                                                #wikipedia
+import smtplib                                                  #mail
+import webbrowser as wb                                         #web browsing
+import os                                                       #system access
+import pyautogui                                                #screenshot
+import psutil                                                   #CPU and Battery
+import pyjokes                                                  #jokes
 
-engine = pyttsx3.init()
+engine = pyttsx3.init()                                         #variable for converting text to speech
 
-def speak(audio):
+def speak(audio):                                               #function for converting text to speech
     engine.say(audio)
     engine.runAndWait()
     
-def time():
+def time():                                                     #function for speaking time
     Time = datetime.datetime.now().strftime("%I:%M:%S")
     speak(Time)
 
-def date():
+def date():                                                     #function for speaking date
     year = int(datetime.datetime.now().year)
     month = int(datetime.datetime.now().month)
     date = int(datetime.datetime.now().day)
@@ -34,7 +33,7 @@ def date():
     speak(month)
     speak(year)
     
-def wishme(n):
+def wishme(n):                                                  #function for wishing the user
     speak("Welcome back " + n)
     speak("It's")
     time()
@@ -49,7 +48,7 @@ def wishme(n):
     elif hour >=18 and hour<=24:
         speak("Good night nag!")
 
-def takeCommand():
+def takeCommand():                                              #function for accepting commands
     r = sr.Recognizer()
     with sr.Microphone() as source:
         print("Listening..")
@@ -65,8 +64,7 @@ def takeCommand():
         return "None"
     return query
 
-
-def sendEmail(to, content):
+def sendEmail(to, content):                                     #function for sending mail
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.eclo()
     server.starttls()
@@ -74,18 +72,19 @@ def sendEmail(to, content):
     server.sendmail('laxminagln@gmail.com', to, content)
     server.close()
 
-def screenshot():
+def screenshot():                                               #function for taking screenshot
     img = pyautogui.screenshot()
     img.save('file path with file name and extension')
     
-def cpu():
+def cpu():                                                      #function for speaking CPU stats
     usage = str(psutil.cpu_percent())
     speak("c p u is at " + usage)
     battery = psutil.sensors_battery()
     speak("Battery is at " + battery.percent)
 
-def jokes():
+def jokes():                                                    #function for telling jokes
     speak(pyjokes.get_joke())
+
 if __name__ == "__main__":
     wishme("nag")
     while True:
