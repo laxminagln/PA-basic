@@ -5,3 +5,4 @@ Several changes to make while running the code:
 3. file path for music
 4. file path for retrieving data
 5. file path for saving the screenshot
+6. to part of sending email
